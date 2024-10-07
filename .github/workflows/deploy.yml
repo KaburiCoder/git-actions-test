@@ -20,7 +20,7 @@ jobs:
         echo "${{ secrets.TARGET_SSH_PK }}" > ~/.ssh/target_rsa
         chmod 600 ~/.ssh/jump_rsa
         chmod 600 ~/.ssh/target_rsa
-
+        ls -al ~/
     - name: Set up SSH config
       run: |
         touch ~/.ssh/config
@@ -37,13 +37,6 @@ jobs:
         echo "--------"
         ls -al ~/.ssh
         cat ~/.ssh/config
-
-    - name: Add SSH keys to ssh-agent
-      run: |
-        eval $(ssh-agent -s)
-        ssh-add ~/.ssh/jump_rsa
-        ssh-add ~/.ssh/target_rsa
-        ssh-add -l
 
     - name: Test SSH connection
       run: |
