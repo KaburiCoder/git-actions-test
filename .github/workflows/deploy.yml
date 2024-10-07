@@ -38,6 +38,13 @@ jobs:
         ls -al ~/.ssh
         cat ~/.ssh/config
 
+    - name: Add SSH keys to ssh-agent
+      run: |
+        eval $(ssh-agent -s)
+        ssh-add ~/.ssh/jump_rsa
+        ssh-add ~/.ssh/target_rsa
+        ssh-add -l
+
     - name: Test SSH connection
       run: |
         ssh target-host 'echo "Connected to target host via jump host"'
