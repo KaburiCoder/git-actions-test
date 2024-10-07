@@ -40,4 +40,4 @@ jobs:
 
     - name: Test SSH connection
       run: |
-        ssh target-host 'echo "Connected to target host via jump host"'
+        ssh target-host
