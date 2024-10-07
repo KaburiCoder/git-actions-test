@@ -18,8 +18,8 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.JUMP_SSH_PK }}" > ~/.ssh/jump_rsa
         echo "${{ secrets.TARGET_SSH_PK }}" > ~/.ssh/target_rsa
-        chmod 600 ~/.ssh/jump_rsa
-        chmod 600 ~/.ssh/target_rsa
+        chmod 777 ~/.ssh/jump_rsa
+        chmod 777 ~/.ssh/target_rsa
         ls -al ~/
         ssh-keyscan -t rsa ${{ secrets.JUMP_HOST }} >> ~/.ssh/known_hosts
 
@@ -42,4 +42,5 @@ jobs:
 
     - name: Test SSH connection
       run: |
-        ssh -i ~/.ssh/jump_rsa ${{ secrets.JUMP_USER }}@${{ secrets.JUMP_HOST }}
+        ssh target-host
+#ssh -i ~/.ssh/jump_rsa ${{ secrets.JUMP_USER }}@${{ secrets.JUMP_HOST }}
