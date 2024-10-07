@@ -21,6 +21,8 @@ jobs:
         chmod 600 ~/.ssh/jump_rsa
         chmod 600 ~/.ssh/target_rsa
         ls -al ~/
+        ssh-keyscan -t rsa ${{ secrets.JUMP_HOST }} >> ~/.ssh/known_hosts
+
     - name: Set up SSH config
       run: |
         touch ~/.ssh/config
