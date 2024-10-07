@@ -16,19 +16,22 @@ jobs:
     - name: Set up SSH key
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY2 }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        cat ~/.ssh/id_rsa
+        echo "${{ secrets.JUMP_SSH_PK }}" > ~/.ssh/jump_rsa
+        echo "${{ secrets.TARGET_SSH_PK }}" > ~/.ssh/target_rsa
+        chmod 600 ~/.ssh/jump_rsa
+        chmod 600 ~/.ssh/target_rsa
+
     - name: Set up SSH config
       run: |
         touch ~/.ssh/config
         echo "Host jump-host" >> ~/.ssh/config
-        echo "  HostName jump.host.com" >> ~/.ssh/config
-        echo "  User jumpuser" >> ~/.ssh/config
-        echo "  IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
+        echo "  HostName ${{ secrets.JUMP_HOST }}" >> ~/.ssh/config
+        echo "  User ${{ secrets.JUMP_USER }}" >> ~/.ssh/config
+        echo "  IdentityFile ~/.ssh/jump_rsa" >> ~/.ssh/config
         echo "Host target-host" >> ~/.ssh/config
-        echo "  HostName target.host.com" >> ~/.ssh/config
-        echo "  User targetuser" >> ~/.ssh/config
+        echo "  HostName ${{ secrets.TARGET_HOST }}" >> ~/.ssh/config
+        echo "  User ${{ secrets.TARGET_USER }}" >> ~/.ssh/config
+        echo "  IdentityFile ~/.ssh/target_rsa" >> ~/.ssh/config
         echo "  ProxyJump jump-host" >> ~/.ssh/config
         chmod 600 ~/.ssh/config
         echo "--------"
