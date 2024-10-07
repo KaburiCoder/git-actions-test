@@ -45,5 +45,5 @@ jobs:
 
       - name: Test SSH connection
         run: |
-          ssh target-host "sed -i 's/app: hs-client/app: hs-test/' test.txt"
+          ssh target-host "sed -i 's/app: hs-test/app: hs-client/' test.txt && echo 'hi' >> test2.txt"
 # ssh -i ~/.ssh/jump_rsa ${{ secrets.JUMP_USER }}@${{ secrets.JUMP_HOST }}
