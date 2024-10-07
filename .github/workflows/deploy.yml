@@ -35,6 +35,7 @@ jobs:
         echo "  ProxyJump jump-host" >> ~/.ssh/config
         chmod 600 ~/.ssh/config
         echo "--------"
+        ls -al ~/.ssh
         cat ~/.ssh/config
 
     - name: Test SSH connection
