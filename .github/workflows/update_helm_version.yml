@@ -10,17 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout click-helms repository
         uses: actions/checkout@v2
         with:
           repository: KaburiCoder/click-helms
           token: ${{ secrets.CLICK_HELMS_REPO_TOKEN }} # GitHub 토큰
-          path: .
-          ref: main  # 기본 브랜치를 명시적으로 지정 (main이 기본 브랜치일 경우)
+          path: click-log
+          ref: main # 기본 브랜치를 명시적으로 지정 (main이 기본 브랜치일 경우)
+
       - name: Update YAML file
         run: |
-          echo "test readme" >> README.md
-# sed -i 's/old_value/new_value/' b-repo/path/to/your-file.yaml
+          sed '/client:/,/service:/s/version: ".*"/version: "${{ github.run_number }}"/' values.yaml
 
       - name: Commit and push changes
         run: |
