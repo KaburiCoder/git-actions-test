@@ -1,0 +1,35 @@
+name: Update YAML in B repository
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-yaml:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout A repository
+        uses: actions/checkout@v2
+
+      - name: Checkout B repository
+        uses: actions/checkout@v2
+        with:
+          repository: Kaburi/click-helms
+          token: ${{ secrets.CLICK_HELMS_REPO_TOKEN }} # GitHub 토큰
+          path: .
+
+      - name: Update YAML file
+        run: |
+          echo "test readme" >> README.md
+# sed -i 's/old_value/new_value/' b-repo/path/to/your-file.yaml
+
+      - name: Commit and push changes
+        run: |
+          cd .
+          git config --global user.name "${{ secrets.USER_NAME }}"
+          git config --global user.email "${{ secrets.USER_EMAIL }}"
+          git add README.md
+          git commit -m "Test Update"
+          git push
