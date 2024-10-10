@@ -20,7 +20,7 @@ jobs:
 
       - name: Update YAML file
         run: |
-          sed '/client:/,/service:/s/version: ".*"/version: "${{ github.run_number }}"/' click-log/values.yaml
+          sed -i '/client:/,/service:/s/version: ".*"/version: "${{ github.run_number }}"/' click-log/values.yaml
 
       - name: Commit and push changes
         run: |
