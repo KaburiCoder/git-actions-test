@@ -10,10 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout A repository
-        uses: actions/checkout@v2
-
-      - name: Checkout B repository
+      - name: Checkout repository
         uses: actions/checkout@v2
         with:
           repository: Kaburi/click-helms
