@@ -15,7 +15,7 @@ jobs:
         with:
           repository: KaburiCoder/click-helms
           token: ${{ secrets.CLICK_HELMS_REPO_TOKEN }} # GitHub 토큰
-          path: click-log
+          path: .
           ref: main # 기본 브랜치를 명시적으로 지정 (main이 기본 브랜치일 경우)
 
       - name: Update YAML file
